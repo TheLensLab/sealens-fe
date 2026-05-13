@@ -240,7 +240,7 @@ export default function ResultsView({ data, uploadName, onReset }: ResultsViewPr
   }
 
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px 80px' }}>
+    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '24px 24px 60px' }}>
       {/* Header */}
       <div
         style={{

@@ -88,7 +88,7 @@ export default function ProgressView({ uploadName, onDone }: ProgressViewProps) 
       style={{
         maxWidth: '600px',
         margin: '0 auto',
-        padding: '80px 24px',
+        padding: '48px 24px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

@@ -95,7 +95,7 @@ export default function UploadView({ onUploadStart, onUploadComplete }: UploadVi
       style={{
         maxWidth: '720px',
         margin: '0 auto',
-        padding: '80px 24px',
+        padding: '48px 24px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

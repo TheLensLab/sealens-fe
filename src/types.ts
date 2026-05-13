@@ -71,7 +71,21 @@ export interface FishSpeciesFamily {
   species: SpeciesEntry[]
 }
 
-export type AppStage = 'upload' | 'uploading' | 'processing' | 'results'
+export type AppStage = 'upload' | 'uploading' | 'processing' | 'results' | 'library'
+
+export interface VideoSummary {
+  name: string
+  displayName: string
+  status: string
+  totalDetections: number
+  familyCount: number
+  totalFish: number
+  thumbnail: string | null
+  originalVideo: string | null
+  fileSize: number | null
+  createdAt: string | null
+  updatedAt: string | null
+}
 
 export interface ReassignTarget {
   uploadName: string

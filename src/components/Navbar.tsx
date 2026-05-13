@@ -1,8 +1,9 @@
 interface NavbarProps {
   onLogoClick: () => void
+  onLibraryClick?: () => void
 }
 
-export default function Navbar({ onLogoClick }: NavbarProps) {
+export default function Navbar({ onLogoClick, onLibraryClick }: NavbarProps) {
   return (
     <nav
       style={{
@@ -18,14 +19,41 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
         zIndex: 100,
       }}
     >
-      <button
-        className="nav-logo"
-        onClick={onLogoClick}
-        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-      >
-        <span style={{ fontSize: '24px' }}>🐟</span>
-        <span className="logo-text">SeaLens</span>
-      </button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+        <button
+          className="nav-logo"
+          onClick={onLogoClick}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+        >
+          <span style={{ fontSize: '24px' }}>🐟</span>
+          <span className="logo-text">SeaLens</span>
+        </button>
+
+        {onLibraryClick && (
+          <button
+            onClick={onLibraryClick}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '6px 12px',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: 'var(--color-mid)',
+              fontFamily: 'inherit',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-surface-light)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent'
+            }}
+          >
+            Video Library
+          </button>
+        )}
+      </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <span className="badge">ML-Powered Detection</span>
