@@ -1,9 +1,10 @@
 import type { ProgressData, SpeciesEntry, VideoSummary } from './types'
 
-const BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? ''
+export const API_API_BASE =
+  ((import.meta.env.VITE_API_API_BASE as string | undefined) ?? 'https://sealens.aryahanif.xyz').replace(/\/$/, '')
 
 export async function fetchProgress(name: string): Promise<ProgressData> {
-  const res = await fetch(`${BASE}/check_progress/${encodeURIComponent(name)}`)
+  const res = await fetch(`${API_API_BASE}/check_progress/${encodeURIComponent(name)}`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json() as Promise<ProgressData>
 }
@@ -14,7 +15,7 @@ export async function reassignFish(payload: {
   species: SpeciesEntry
   toFamilyName?: string
 }): Promise<{ success: boolean; message: string }> {
-  const res = await fetch(`${BASE}/api/fish/reassign`, {
+  const res = await fetch(`${API_BASE}/api/fish/reassign`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -50,14 +51,14 @@ export async function fetchVideosList(params?: FetchVideosParams): Promise<Video
   if (params?.sortOrder) query.set('sortOrder', params.sortOrder)
 
   const qs = query.toString()
-  const res = await fetch(`${BASE}/api/videos${qs ? `?${qs}` : ''}`)
+  const res = await fetch(`${API_BASE}/api/videos${qs ? `?${qs}` : ''}`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   const json = (await res.json()) as { data?: VideoSummary[] }
   return json.data ?? []
 }
 
 export async function fetchFishDatabase(): Promise<FishCatalogFamily[]> {
-  const res = await fetch(`${BASE}/api/fish-species/database`)
+  const res = await fetch(`${API_BASE}/api/fish-species/database`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   const json = (await res.json()) as { data?: { catalog?: FishCatalogFamily[] } }
   return json.data?.catalog ?? []
