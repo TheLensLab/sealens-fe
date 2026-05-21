@@ -3,6 +3,8 @@ import type { ProgressData, SpeciesEntry, VideoSummary } from './types'
 export const API_API_BASE =
   ((import.meta.env.VITE_API_API_BASE as string | undefined) ?? 'https://sealens.aryahanif.xyz').replace(/\/$/, '')
 
+export const API_BASE = API_API_BASE
+
 export async function fetchProgress(name: string): Promise<ProgressData> {
   const res = await fetch(`${API_API_BASE}/check_progress/${encodeURIComponent(name)}`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)

@@ -7,6 +7,10 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 4173,
     allowedHosts: 'all',
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+    },
     proxy: {
       '/api': 'http://localhost:5001',
       '/files': 'http://localhost:5001',
@@ -19,5 +23,12 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 4173,
     allowedHosts: 'all',
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+    },
+  },
+  optimizeDeps: {
+    exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
   },
 })
