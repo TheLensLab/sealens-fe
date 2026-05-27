@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
-import { fetchVideosList } from '../api'
-import type { SortField, SortOrder } from '../api'
-import type { VideoSummary } from '../types'
+import { fetchVideosList } from '../utils/api'
+import type { SortField, SortOrder } from '../utils/api'
+import type { VideoSummary } from '../data/types'
 
 interface VideosListViewProps {
   onSelectVideo: (name: string) => void

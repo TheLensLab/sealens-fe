@@ -2,7 +2,7 @@ import { useRef, useState, useCallback } from 'react'
 import * as tus from 'tus-js-client'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile, toBlobURL } from '@ffmpeg/util'
-import { API_BASE } from '../api'
+import { API_BASE } from '../utils/api'
 
 interface UploadViewProps {
   onUploadStart: (cleanName: string) => void
@@ -119,7 +119,7 @@ export default function UploadView({ onUploadStart, onUploadComplete }: UploadVi
       setError(null)
       setProgress(0)
       setIsUploading(true)
-      
+
       const footageUID = generateUUID()
       onUploadStart(footageUID)
 
@@ -187,7 +187,7 @@ export default function UploadView({ onUploadStart, onUploadComplete }: UploadVi
 
   async function handleSubmit() {
     if (!file) return
-    
+
     let fileToUpload = file
 
     if (compressVideo) {

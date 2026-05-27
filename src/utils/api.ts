@@ -1,4 +1,4 @@
-import type { ProgressData, SpeciesEntry, VideoSummary } from './types'
+import type { ProgressData, SpeciesEntry, VideoSummary } from '../data/types'
 
 export const API_API_BASE =
   ((import.meta.env.VITE_API_API_BASE as string | undefined) ?? 'https://sealens.aryahanif.xyz').replace(/\/$/, '')

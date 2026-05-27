@@ -1,4 +1,4 @@
-import type { AppStage } from '../types'
+import type { AppStage } from '../data/types'
 
 interface SidebarProps {
   stage: AppStage

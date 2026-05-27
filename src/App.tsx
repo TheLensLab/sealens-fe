@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { fetchProgress } from './api'
-import type { AppStage, ProgressData } from './types'
+import { fetchProgress } from './utils/api'
+import type { AppStage, ProgressData } from './data/types'
 import Sidebar from './components/Sidebar'
-import UploadView from './components/UploadView'
-import ProgressView from './components/ProgressView'
-import ResultsView from './components/ResultsView'
-import VideosListView from './components/VideosListView'
+import UploadView from './pages/UploadView'
+import ProgressView from './pages/ProgressView'
+import ResultsView from './pages/ResultsView'
+import VideosListView from './pages/VideosListView'
+import SignIn from './pages/SignIn'
 
 const STAGE_TITLES: Record<string, string> = {
   upload: 'Upload',
@@ -16,10 +17,15 @@ const STAGE_TITLES: Record<string, string> = {
 }
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [stage, setStage] = useState<AppStage>('upload')
   const [uploadName, setUploadName] = useState<string>('')
   const [results, setResults] = useState<ProgressData | null>(null)
   const [loadingVideo, setLoadingVideo] = useState(false)
+
+  if (!isAuthenticated) {
+    return <SignIn onSignIn={() => setIsAuthenticated(true)} />
+  }
 
   function handleUploadStart(cleanName: string) {
     setUploadName(cleanName)

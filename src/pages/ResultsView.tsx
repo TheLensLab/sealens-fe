@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { FishFamily, FishImageData, ProgressData, ReassignTarget, SpeciesEntry } from '../types'
-import ReassignModal from './ReassignModal'
+import type { FishFamily, FishImageData, ProgressData, ReassignTarget, SpeciesEntry } from '../data/types'
+import ReassignModal from '../components/ReassignModal'
 
 interface ResultsViewProps {
   data: ProgressData

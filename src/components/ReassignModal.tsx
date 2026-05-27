@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { fetchFishDatabase, reassignFish } from '../api'
-import type { FishCatalogFamily } from '../api'
-import type { ReassignTarget, SpeciesEntry } from '../types'
+import { fetchFishDatabase, reassignFish } from '../utils/api'
+import type { FishCatalogFamily } from '../utils/api'
+import type { ReassignTarget, SpeciesEntry } from '../data/types'
 
 interface ReassignModalProps {
   target: ReassignTarget

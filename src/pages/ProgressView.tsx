@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { fetchProgress } from '../api'
-import type { ProgressData } from '../types'
+import { fetchProgress } from '../utils/api'
+import type { ProgressData } from '../data/types'
 
 interface ProgressViewProps {
   uploadName: string
