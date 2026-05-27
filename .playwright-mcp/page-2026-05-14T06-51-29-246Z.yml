@@ -1,0 +1,266 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - navigation [ref=e6]:
+      - generic [ref=e8]:
+        - link "SeaLens" [ref=e10] [cursor=pointer]:
+          - /url: ./
+          - generic [ref=e16]:
+            - img [ref=e19]
+            - img [ref=e24]
+          - paragraph [ref=e28]: SeaLens
+        - button [ref=e31] [cursor=pointer]
+    - main [ref=e35]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - paragraph [ref=e46]: Currently in pilot phase with marine scientists in Bali
+            - generic [ref=e48]:
+              - heading "Analyze reef ecosystems in minutes, not weeks" [level=1] [ref=e50]
+              - paragraph [ref=e52]: Detect, identify, and count fish from underwater footage, with scientists in control through review and validation.
+          - generic [ref=e53]:
+            - link "Request a demo Request a demo" [ref=e56] [cursor=pointer]:
+              - /url: ./contact-us
+              - paragraph [ref=e59]: Request a demo
+              - paragraph [ref=e62]: Request a demo
+            - link "See Pricing" [ref=e65] [cursor=pointer]:
+              - /url: ./contact-us
+              - generic [ref=e66]:
+                - paragraph [ref=e68]: Become a pilot partner
+                - generic [ref=e69]:
+                  - img [ref=e72]
+                  - img [ref=e76]
+        - img "Business dashboard showing revenue, deals, customer list, growth chart, and new activity." [ref=e84]
+      - generic [ref=e87]:
+        - paragraph [ref=e91]:
+          - text: Co-developed and tested with marine researchers and conservation teams working directly on reef monitoring and restoration. Inlcuding teams from
+          - strong [ref=e92]: Apple Developer Academy
+          - text: ","
+          - strong [ref=e93]: Apple Developer Institute for Entrepreneurship
+          - text: ","
+          - strong [ref=e94]
+          - text: and
+          - strong [ref=e95]: Livingseas Foundation
+          - text: .
+        - generic [ref=e98]:
+          - generic [ref=e99]:
+            - heading "Reef monitoring can’t keep up with reef loss" [level=2] [ref=e101]
+            - paragraph [ref=e103]: Coral reefs support over 25% of marine life, yet more than half are already gone, and up to 90% could disappear by 2050.
+          - generic [ref=e104]:
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - heading "Reefs are disappearing fast" [level=5] [ref=e109]
+                - paragraph [ref=e111]: Driven by rising temperatures, pollution, and overfishing, reefs are declining at an alarming rate.
+              - img "Logos of tools outward, illustrating easy integration with no engineering required." [ref=e115]
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - heading "Reef health depends on fish populations" [level=5] [ref=e120]
+                - paragraph [ref=e122]: Changes in fish populations are one of the clearest signals of reef health and restoration progress.
+              - img "Gauge showing levels of user engagement, with tags for high and low engagement percentages." [ref=e126]
+            - generic [ref=e129]:
+              - heading "Monitoring is slow and hard to scale" [level=5] [ref=e131]
+              - paragraph [ref=e133]: Manual counting from dives and videos is time-consuming, inconsistent, and difficult to scale across reefs.
+          - generic [ref=e137]:
+            - heading "When data is slow, action comes too late" [level=3] [ref=e139]
+            - paragraph [ref=e141]: Delaying critical conservation decisions.
+        - generic [ref=e144]:
+          - heading "Built for teams who need faster reef insights" [level=2] [ref=e147]
+          - generic [ref=e148]:
+            - generic [ref=e150]:
+              - generic "LinkedIn" [ref=e151]
+              - generic [ref=e153]:
+                - paragraph [ref=e155]: Marine researchers
+                - paragraph [ref=e157]: Turn underwater footage into structured insights without weeks of manual review
+            - generic [ref=e159]:
+              - generic "LinkedIn" [ref=e160]
+              - generic [ref=e162]:
+                - paragraph [ref=e164]: NGOs
+                - paragraph [ref=e166]: Track reef health and restoration impact in real time
+            - generic [ref=e168]:
+              - generic "LinkedIn" [ref=e169]
+              - generic [ref=e171]:
+                - paragraph [ref=e173]: Government
+                - paragraph [ref=e175]: Access reliable data for reporting and policy decisions
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - generic [ref=e179]:
+              - paragraph [ref=e186]: Features
+              - heading "From raw footage to reliable insights" [level=2] [ref=e189]
+            - paragraph [ref=e191]: Turn underwater videos into structured, validated data without the time and effort of manual analysis.
+          - generic [ref=e193]:
+            - generic [ref=e196]:
+              - generic [ref=e198]:
+                - paragraph [ref=e204]: Detection
+                - generic [ref=e206]:
+                  - heading "Instant fish detection and identification" [level=3] [ref=e208]
+                  - paragraph [ref=e210]: Automatically detect and identify fish from underwater footage, covering 100+ species and saving hours of manual review
+              - img "Website intent product image" [ref=e213]
+            - generic [ref=e216]:
+              - generic [ref=e218]:
+                - paragraph [ref=e224]: Tracking
+                - generic [ref=e226]:
+                  - heading "Track biodiversity changes over time" [level=3] [ref=e228]
+                  - paragraph [ref=e230]: Understand how fish populations shift across reefs, with data that reflects real conditions on the ground
+              - img "Personalized outreach product image" [ref=e233]
+            - generic [ref=e236]:
+              - generic [ref=e238]:
+                - paragraph [ref=e244]: Validation
+                - generic [ref=e246]:
+                  - heading "Validate results with confidence" [level=3] [ref=e248]
+                  - paragraph [ref=e250]: Review and correct detections to ensure accuracy, while keeping researchers in control of the data
+              - img "Outbound automation product image" [ref=e253]
+            - generic [ref=e256]:
+              - generic [ref=e258]:
+                - paragraph [ref=e264]: Learning
+                - generic [ref=e266]:
+                  - heading "Continuous learning over time" [level=3] [ref=e268]
+                  - paragraph [ref=e270]: As you review and correct results, SeaLens adapts over time and becoming more accurate for your ecosystem
+              - img "Active campaign product image" [ref=e273]
+            - generic [ref=e276]:
+              - generic [ref=e278]:
+                - paragraph [ref=e284]: Insights
+                - generic [ref=e286]:
+                  - heading "Turn data into actionable insights" [level=3] [ref=e288]
+                  - paragraph [ref=e290]: Visualize trends and export structured data for research, reporting, and conservation decisions
+              - img "Active campaign product image" [ref=e293]
+        - generic [ref=e298]:
+          - generic [ref=e299]:
+            - img "man standing in front of window" [ref=e301]
+            - img "Livingseas Logo" [ref=e305]
+          - generic [ref=e306]:
+            - generic [ref=e308]:
+              - paragraph [ref=e309]: "\"SeaLens helps the manual process of monitoring, making the data ready to publish, saving a lot of time, and that’s the best part.\""
+              - paragraph: "\"SeaLens helps the manual process of monitoring, making the data ready to publish, saving a lot of time, and that’s the best part.\""
+            - paragraph [ref=e311]:
+              - strong [ref=e312]: Leon Boey, CEO of Livingseas
+        - generic [ref=e314]:
+          - generic [ref=e315]:
+            - paragraph [ref=e322]: Benefits
+            - heading "Built for real-world reef monitoring" [level=2] [ref=e325]
+          - generic [ref=e327]:
+            - generic [ref=e329]:
+              - generic "LinkedIn" [ref=e330]
+              - generic [ref=e332]:
+                - heading "From weeks of work to minutes" [level=5] [ref=e334]
+                - paragraph [ref=e336]: Turn hours of underwater footage into structured insights, without manual review
+            - generic [ref=e338]:
+              - generic "LinkedIn" [ref=e339]
+              - generic [ref=e341]:
+                - heading "Accurate and research-ready" [level=5] [ref=e343]
+                - paragraph [ref=e345]: Human validation ensures reliable, transparent results you can trust
+            - generic [ref=e347]:
+              - generic "LinkedIn" [ref=e348]
+              - generic [ref=e350]:
+                - heading "Track ecosystem change over time" [level=5] [ref=e352]
+                - paragraph [ref=e354]: Monitor biodiversity trends and measure restoration impact
+            - generic [ref=e356]:
+              - generic "LinkedIn" [ref=e357]
+              - generic [ref=e359]:
+                - heading "Make faster, better decisions" [level=5] [ref=e361]
+                - paragraph [ref=e363]: Get the data you need to act when it matters most
+        - generic [ref=e365]:
+          - generic [ref=e367]:
+            - generic [ref=e368]:
+              - heading "Partner with us" [level=2] [ref=e370]
+              - paragraph [ref=e372]: We’re collaborating with research teams and conservation organizations to refine SeaLens in real-world environments
+            - generic [ref=e373]:
+              - link "Become a pilot partner Become a pilot partner" [ref=e376] [cursor=pointer]:
+                - /url: ./contact-us
+                - paragraph [ref=e379]: Become a pilot partner
+                - paragraph [ref=e382]: Become a pilot partner
+              - link "See Pricing" [ref=e385] [cursor=pointer]:
+                - /url: ./contact-us
+                - generic [ref=e386]:
+                  - paragraph [ref=e388]: Request a demo
+                  - generic [ref=e389]:
+                    - img [ref=e392]
+                    - img [ref=e396]
+          - img "Man with umbrella on the street" [ref=e401]
+        - generic [ref=e404]:
+          - generic [ref=e405]:
+            - paragraph [ref=e412]: FAQs
+            - heading "Everything you need to know" [level=2] [ref=e415]
+            - paragraph [ref=e417]: We’ve answered common questions about how SeaLens works and how your team can get involved
+          - generic [ref=e420]:
+            - generic [ref=e423] [cursor=pointer]:
+              - paragraph [ref=e425]: How accurate is the fish detection?
+              - button [ref=e426]
+            - generic [ref=e432] [cursor=pointer]:
+              - paragraph [ref=e434]: What types of fish can SeaLens detect?
+              - button [ref=e435]
+            - generic [ref=e441] [cursor=pointer]:
+              - paragraph [ref=e443]: Can I use my own dataset?
+              - button [ref=e444]
+            - generic [ref=e450] [cursor=pointer]:
+              - paragraph [ref=e452]: Is SeaLens available for public use?
+              - button [ref=e453]
+            - generic [ref=e459] [cursor=pointer]:
+              - paragraph [ref=e461]: How can my organization partner with SeaLens?
+              - button [ref=e462]
+    - generic [ref=e468]:
+      - generic [ref=e470]:
+        - generic [ref=e471]:
+          - generic [ref=e472]:
+            - heading "Make faster conservation decisions" [level=2] [ref=e474]
+            - paragraph [ref=e476]: Start analyzing reef ecosystems in minutes, not weeks.
+          - generic [ref=e477]:
+            - link "Request a demo Request a demo" [ref=e479] [cursor=pointer]:
+              - /url: ./contact-us
+              - paragraph [ref=e482]: Request a demo
+              - paragraph [ref=e485]: Request a demo
+            - link "See Pricing" [ref=e487] [cursor=pointer]:
+              - /url: ./contact-us#hero
+              - generic [ref=e488]:
+                - paragraph [ref=e490]: Become a pilot partner
+                - generic [ref=e491]:
+                  - img [ref=e494]
+                  - img [ref=e498]
+        - img "Drospecta's dashboard" [ref=e502]
+      - contentinfo [ref=e503]:
+        - generic [ref=e504]:
+          - generic [ref=e505]:
+            - generic [ref=e506]:
+              - generic [ref=e507]:
+                - link "SeaLens" [ref=e509] [cursor=pointer]:
+                  - /url: ./
+                  - generic [ref=e515]:
+                    - img [ref=e518]
+                    - img [ref=e523]
+                  - paragraph [ref=e527]: SeaLens
+                - paragraph [ref=e529]: See the fish, save the reef.
+              - generic [ref=e530]:
+                - link "LinkedIn" [ref=e532]:
+                  - /url: https://www.linkedin.com/
+                - link "Instagram" [ref=e534]:
+                  - /url: mailto:contact@sealens.app
+            - generic [ref=e535]:
+              - generic [ref=e536]:
+                - paragraph [ref=e538]: Pages
+                - generic [ref=e539]:
+                  - paragraph [ref=e541]:
+                    - link "Our story" [ref=e542] [cursor=pointer]:
+                      - /url: ./
+                  - paragraph [ref=e544]:
+                    - link "404" [ref=e545] [cursor=pointer]:
+                      - /url: ./404
+              - generic [ref=e546]:
+                - paragraph [ref=e548]: Information
+                - generic [ref=e549]:
+                  - paragraph [ref=e551]:
+                    - link "Contact" [ref=e552] [cursor=pointer]:
+                      - /url: ./contact-us
+                  - paragraph [ref=e554]:
+                    - link "Terms & conditions" [ref=e555] [cursor=pointer]:
+                      - /url: ./legal/terms-and-conditions
+                  - paragraph [ref=e557]:
+                    - link "Privacy policy" [ref=e558] [cursor=pointer]:
+                      - /url: ./legal/privacy-policy
+                  - paragraph [ref=e560]:
+                    - link "License agreement & open source notices" [ref=e561] [cursor=pointer]:
+                      - /url: ./legal/license-agreement-and-open-source-notices
+          - paragraph [ref=e566]: ©SeaLens 2026. All rights reserved.
+  - generic:
+    - link "Create a free website with Framer, the website builder loved by startups, designers and agencies.":
+      - /url: https://www.framer.com
+      - paragraph [ref=e567] [cursor=pointer]: Create a free website with Framer, the website builder loved by startups, designers and agencies.
+  - img [ref=e568]
+  - img [ref=e572]
