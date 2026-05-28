@@ -1,12 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import type { FishFamily, FishImageData, ProgressData, ReassignTarget, SpeciesEntry } from '../data/types'
 import ReassignModal from '../components/ReassignModal'
-
-interface ResultsViewProps {
-  data: ProgressData
-  uploadName: string
-  onReset: () => void
-}
+import { fetchProgress } from '../utils/api'
 
 function ConfidencePill({ pct }: { pct: number }) {
   const color =
@@ -206,9 +202,43 @@ function FamilySection({
   )
 }
 
-export default function ResultsView({ data, uploadName, onReset }: ResultsViewProps) {
+export default function ResultsView() {
+  const { name = '' } = useParams<{ name: string }>()
+  const { state } = useLocation()
+  const navigate = useNavigate()
+
+  const [data, setData] = useState<ProgressData | null>(state?.data ?? null)
+  const [fetchError, setFetchError] = useState<string | null>(null)
   const [reassignTarget, setReassignTarget] = useState<ReassignTarget | null>(null)
-  const [families, setFamilies] = useState<FishFamily[]>(data.data.fishFamilies)
+  const [families, setFamilies] = useState<FishFamily[]>(state?.data?.data?.fishFamilies ?? [])
+
+  const uploadName = name
+
+  useEffect(() => {
+    if (data) return
+    fetchProgress(uploadName)
+      .then((result) => {
+        setData(result)
+        setFamilies(result.data.fishFamilies)
+      })
+      .catch(() => setFetchError('Failed to load results. Please go back and try again.'))
+  }, [uploadName])
+
+  if (!data && !fetchError) {
+    return (
+      <div style={{ padding: '60px', textAlign: 'center', color: 'var(--color-subtle)' }}>
+        Loading results...
+      </div>
+    )
+  }
+
+  if (fetchError || !data) {
+    return (
+      <div style={{ padding: '60px', textAlign: 'center', color: '#c00' }}>
+        {fetchError}
+      </div>
+    )
+  }
 
   const { annotatedVideoURL, originalVideo, totalDetections, videoMetadata } = data.data
   const duration = videoMetadata?.duration_seconds
@@ -258,7 +288,7 @@ export default function ResultsView({ data, uploadName, onReset }: ResultsViewPr
             {uploadName.replace(/_/g, ' ')}
           </p>
         </div>
-        <button className="btn-primary" onClick={onReset}>
+        <button className="btn-primary" onClick={() => navigate('/upload')}>
           ← Analyse Another Video
         </button>
       </div>

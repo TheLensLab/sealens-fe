@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import SeaLenslogo from '../assests/SeaLenslogo.svg';
 
 interface SignInProps {
@@ -6,6 +7,12 @@ interface SignInProps {
 }
 
 export default function SignIn({ onSignIn }: SignInProps) {
+  const navigate = useNavigate();
+
+  function handleSignIn() {
+    onSignIn();
+    navigate('/upload');
+  }
   return (
     <div className="signin-container">
       {/* Left Panel */}
@@ -21,15 +28,15 @@ export default function SignIn({ onSignIn }: SignInProps) {
           </p>
 
           <div className="signin-providers">
-            <button className="provider-btn" onClick={onSignIn}>
+            <button className="provider-btn" onClick={handleSignIn}>
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" width="20" height="20" />
               Continue with Google
             </button>
-            <button className="provider-btn" onClick={onSignIn}>
+            <button className="provider-btn" onClick={handleSignIn}>
               <img src="https://www.svgrepo.com/show/511330/apple-173.svg" alt="Apple" width="20" height="20" />
               Continue with Apple
             </button>
-            <button className="provider-btn" onClick={onSignIn}>
+            <button className="provider-btn" onClick={handleSignIn}>
               <img src="https://www.svgrepo.com/show/452062/microsoft.svg" alt="Microsoft" width="20" height="20" />
               Continue with Microsoft
             </button>
@@ -44,7 +51,7 @@ export default function SignIn({ onSignIn }: SignInProps) {
               <label htmlFor="email">Email <span className="required">*</span></label>
               <input type="email" id="email" />
             </div>
-            <button className="btn-continue-email" onClick={onSignIn}>
+            <button className="btn-continue-email" onClick={handleSignIn}>
               Continue with email
             </button>
           </div>

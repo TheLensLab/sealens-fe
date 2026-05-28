@@ -1,12 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { fetchVideosList } from '../utils/api'
+import { useNavigate } from 'react-router-dom'
+import { fetchVideosList, fetchProgress } from '../utils/api'
 import type { SortField, SortOrder } from '../utils/api'
 import type { VideoSummary } from '../data/types'
-
-interface VideosListViewProps {
-  onSelectVideo: (name: string) => void
-  onUploadNew: () => void
-}
 
 const PAGE_SIZE = 12
 
@@ -289,7 +285,8 @@ function Pagination({
   )
 }
 
-export default function VideosListView({ onSelectVideo, onUploadNew }: VideosListViewProps) {
+export default function VideosListView() {
+  const navigate = useNavigate()
   const [videos, setVideos] = useState<VideoSummary[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -298,6 +295,23 @@ export default function VideosListView({ onSelectVideo, onUploadNew }: VideosLis
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc')
   const [sizeFilter, setSizeFilter] = useState<SizeFilter>('all')
   const [page, setPage] = useState(1)
+  const [selectingVideo, setSelectingVideo] = useState(false)
+
+  async function handleSelectVideo(name: string) {
+    setSelectingVideo(true)
+    try {
+      const data = await fetchProgress(name)
+      if (data.stage === 'Finished' || data.processPrecentage >= 100 || data.stage === 'Failed') {
+        navigate(`/results/${name}`, { state: { data } })
+      } else {
+        navigate(`/processing/${name}`)
+      }
+    } catch {
+      navigate(`/processing/${name}`)
+    } finally {
+      setSelectingVideo(false)
+    }
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -367,6 +381,9 @@ export default function VideosListView({ onSelectVideo, onUploadNew }: VideosLis
 
   return (
     <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '24px 24px 60px' }}>
+      {selectingVideo && (
+        <div className="loading-overlay">Loading video results...</div>
+      )}
       {/* Header */}
       <div
         style={{
@@ -384,7 +401,7 @@ export default function VideosListView({ onSelectVideo, onUploadNew }: VideosLis
             {finishedCount} of {videos.length} videos processed
           </p>
         </div>
-        <button className="btn-primary" onClick={onUploadNew}>
+        <button className="btn-primary" onClick={() => navigate('/upload')}>
           + Upload New Video
         </button>
       </div>
@@ -537,7 +554,7 @@ export default function VideosListView({ onSelectVideo, onUploadNew }: VideosLis
             <VideoCard
               key={video.name}
               video={video}
-              onSelect={() => onSelectVideo(video.name)}
+              onSelect={() => handleSelectVideo(video.name)}
             />
           ))}
         </div>

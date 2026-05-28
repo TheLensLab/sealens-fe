@@ -71,7 +71,6 @@ export interface FishSpeciesFamily {
   species: SpeciesEntry[]
 }
 
-export type AppStage = 'upload' | 'uploading' | 'processing' | 'results' | 'library'
 
 export interface VideoSummary {
   name: string

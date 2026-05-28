@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { fetchProgress } from './utils/api'
-import type { AppStage, ProgressData } from './data/types'
+import { Routes, Route, Navigate, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import UploadView from './pages/UploadView'
 import ProgressView from './pages/ProgressView'
@@ -8,93 +7,35 @@ import ResultsView from './pages/ResultsView'
 import VideosListView from './pages/VideosListView'
 import SignIn from './pages/SignIn'
 
-const STAGE_TITLES: Record<string, string> = {
-  upload: 'Upload',
-  uploading: 'Uploading',
-  processing: 'Processing',
-  results: 'Analysis Results',
-  library: 'Video Library',
+function useBreadcrumb(): string {
+  const { pathname } = useLocation()
+  if (pathname === '/upload') return 'Upload'
+  if (pathname === '/library') return 'Video Library'
+  if (pathname.startsWith('/processing/')) {
+    const name = decodeURIComponent(pathname.slice('/processing/'.length))
+    return `Processing — ${name.replace(/_/g, ' ')}`
+  }
+  if (pathname.startsWith('/results/')) {
+    const name = decodeURIComponent(pathname.slice('/results/'.length))
+    return `Analysis Results — ${name.replace(/_/g, ' ')}`
+  }
+  return ''
 }
 
-export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [stage, setStage] = useState<AppStage>('upload')
-  const [uploadName, setUploadName] = useState<string>('')
-  const [results, setResults] = useState<ProgressData | null>(null)
-  const [loadingVideo, setLoadingVideo] = useState(false)
-
-  if (!isAuthenticated) {
-    return <SignIn onSignIn={() => setIsAuthenticated(true)} />
-  }
-
-  function handleUploadStart(cleanName: string) {
-    setUploadName(cleanName)
-    setStage('uploading')
-  }
-
-  function handleUploadComplete(cleanName: string) {
-    setUploadName(cleanName)
-    setStage('processing')
-  }
-
-  function handleProcessingDone(data: ProgressData) {
-    setResults(data)
-    setStage('results')
-  }
-
-  function handleReset() {
-    setStage('upload')
-    setUploadName('')
-    setResults(null)
-  }
-
-  function handleNavigate(target: AppStage) {
-    if (target === 'upload') {
-      handleReset()
-    } else if (target === 'library') {
-      setStage('library')
-      setUploadName('')
-      setResults(null)
-    }
-  }
-
-  async function handleSelectVideo(name: string) {
-    setLoadingVideo(true)
-    try {
-      const data = await fetchProgress(name)
-      setUploadName(name)
-      if (data.stage === 'Finished' || data.processPrecentage >= 100) {
-        setResults(data)
-        setStage('results')
-      } else if (data.stage === 'Failed') {
-        setResults(data)
-        setStage('results')
-      } else {
-        setStage('processing')
-      }
-    } catch {
-      setUploadName(name)
-      setStage('processing')
-    } finally {
-      setLoadingVideo(false)
-    }
-  }
-
-  const breadcrumb = uploadName
-    ? `${STAGE_TITLES[stage] ?? stage} — ${uploadName.replace(/_/g, ' ')}`
-    : STAGE_TITLES[stage] ?? stage
+function AppLayout() {
+  const navigate = useNavigate()
+  const breadcrumb = useBreadcrumb()
 
   return (
     <div className="app-shell">
-      <Sidebar stage={stage} onNavigate={handleNavigate} />
+      <Sidebar />
 
       <div className="main-area">
-        {/* Top toolbar */}
         <header className="toolbar">
           <div className="toolbar-left">
             <button
               className="toolbar-nav-btn"
-              onClick={handleReset}
+              onClick={() => navigate(-1)}
               title="Back"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -103,7 +44,7 @@ export default function App() {
             </button>
             <button
               className="toolbar-nav-btn"
-              disabled
+              onClick={() => navigate(1)}
               title="Forward"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -118,45 +59,36 @@ export default function App() {
           </div>
         </header>
 
-        {/* Main content */}
         <main className="content-area">
-          {(stage === 'upload' || stage === 'uploading') && (
-            <UploadView
-              onUploadStart={handleUploadStart}
-              onUploadComplete={handleUploadComplete}
-            />
-          )}
-
-          {stage === 'processing' && (
-            <ProgressView
-              uploadName={uploadName}
-              onDone={handleProcessingDone}
-            />
-          )}
-
-          {stage === 'results' && results && (
-            <ResultsView
-              data={results}
-              uploadName={uploadName}
-              onReset={handleReset}
-            />
-          )}
-
-          {stage === 'library' && (
-            <>
-              {loadingVideo && (
-                <div className="loading-overlay">
-                  Loading video results...
-                </div>
-              )}
-              <VideosListView
-                onSelectVideo={handleSelectVideo}
-                onUploadNew={handleReset}
-              />
-            </>
-          )}
+          <Outlet />
         </main>
       </div>
     </div>
+  )
+}
+
+function ProtectedRoute({ isAuthenticated }: { isAuthenticated: boolean }) {
+  return isAuthenticated ? <Outlet /> : <Navigate to="/sign-in" replace />
+}
+
+export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  return (
+    <Routes>
+      <Route path="/sign-in" element={<SignIn onSignIn={() => setIsAuthenticated(true)} />} />
+
+      <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+        <Route element={<AppLayout />}>
+          <Route index element={<Navigate to="/upload" replace />} />
+          <Route path="/upload" element={<UploadView />} />
+          <Route path="/processing/:name" element={<ProgressView />} />
+          <Route path="/results/:name" element={<ResultsView />} />
+          <Route path="/library" element={<VideosListView />} />
+        </Route>
+      </Route>
+
+      <Route path="*" element={<Navigate to="/upload" replace />} />
+    </Routes>
   )
 }

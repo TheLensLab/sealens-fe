@@ -1,14 +1,4 @@
-import type { AppStage } from '../data/types'
-
-interface SidebarProps {
-  stage: AppStage
-  onNavigate: (stage: AppStage) => void
-}
-
-const NAV_ITEMS: { key: AppStage; label: string; icon: string }[] = [
-  { key: 'upload', label: 'Upload', icon: 'arrow.up.doc' },
-  { key: 'library', label: 'Video Library', icon: 'film' },
-]
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function SidebarIcon({ name }: { name: string }) {
   const icons: Record<string, string> = {
@@ -22,23 +12,28 @@ function SidebarIcon({ name }: { name: string }) {
   )
 }
 
-export default function Sidebar({ stage, onNavigate }: SidebarProps) {
-  const isActive = (key: AppStage) => {
-    if (key === 'upload') return stage === 'upload' || stage === 'uploading'
-    if (key === 'library') return stage === 'library'
-    return stage === key
-  }
+const NAV_ITEMS = [
+  { path: '/upload', label: 'Upload', icon: 'arrow.up.doc' },
+  { path: '/library', label: 'Video Library', icon: 'film' },
+]
 
-  const showProcessing = stage === 'processing'
-  const showResults = stage === 'results'
+export default function Sidebar() {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
+  const isProcessing = pathname.startsWith('/processing/')
+  const isResults = pathname.startsWith('/results/')
+
+  function isNavActive(path: string) {
+    if (path === '/upload') return pathname === '/upload'
+    if (path === '/library') return pathname === '/library'
+    return false
+  }
 
   return (
     <aside className="sidebar">
       {/* Logo */}
-      <button
-        className="sidebar-logo"
-        onClick={() => onNavigate('upload')}
-      >
+      <button className="sidebar-logo" onClick={() => navigate('/upload')}>
         <span style={{ fontSize: '20px' }}>🐟</span>
         <span className="logo-text" style={{ fontSize: '17px' }}>SeaLens</span>
       </button>
@@ -48,9 +43,9 @@ export default function Sidebar({ stage, onNavigate }: SidebarProps) {
         <p className="sidebar-section-label">Favourites</p>
         {NAV_ITEMS.map((item) => (
           <button
-            key={item.key}
-            className={`sidebar-item${isActive(item.key) ? ' active' : ''}`}
-            onClick={() => onNavigate(item.key)}
+            key={item.path}
+            className={`sidebar-item${isNavActive(item.path) ? ' active' : ''}`}
+            onClick={() => navigate(item.path)}
           >
             <SidebarIcon name={item.icon} />
             <span>{item.label}</span>
@@ -59,16 +54,16 @@ export default function Sidebar({ stage, onNavigate }: SidebarProps) {
       </div>
 
       {/* Active session */}
-      {(showProcessing || showResults) && (
+      {(isProcessing || isResults) && (
         <div className="sidebar-section">
           <p className="sidebar-section-label">Current Session</p>
-          {showProcessing && (
+          {isProcessing && (
             <button className="sidebar-item active">
               <span className="sidebar-status-dot processing" />
               <span>Processing</span>
             </button>
           )}
-          {showResults && (
+          {isResults && (
             <button className="sidebar-item active">
               <span className="sidebar-status-dot complete" />
               <span>Results</span>

@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { fetchProgress } from '../utils/api'
 import type { ProgressData } from '../data/types'
-
-interface ProgressViewProps {
-  uploadName: string
-  onDone: (data: ProgressData) => void
-}
 
 const STAGE_LABELS: Record<string, string> = {
   yolo: 'Running YOLO detection',
@@ -30,7 +26,10 @@ function stepIndex(stage: string): number {
   return idx === -1 ? 1 : idx
 }
 
-export default function ProgressView({ uploadName, onDone }: ProgressViewProps) {
+export default function ProgressView() {
+  const { name = '' } = useParams<{ name: string }>()
+  const navigate = useNavigate()
+
   const [data, setData] = useState<ProgressData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [dots, setDots] = useState('.')
@@ -49,7 +48,7 @@ export default function ProgressView({ uploadName, onDone }: ProgressViewProps) 
 
     async function poll() {
       try {
-        const result = await fetchProgress(uploadName)
+        const result = await fetchProgress(name)
         if (cancelled) return
         setData(result)
 
@@ -58,17 +57,18 @@ export default function ProgressView({ uploadName, onDone }: ProgressViewProps) 
 
         if (done || failed) {
           if (timerRef.current) clearInterval(timerRef.current)
-          if (!failed) onDone(result)
-          else setError(result.message || 'Processing failed on the server.')
+          if (!failed) {
+            navigate(`/results/${name}`, { state: { data: result } })
+          } else {
+            setError(result.message || 'Processing failed on the server.')
+          }
         }
       } catch (err) {
         if (cancelled) return
         console.warn('[poll] error:', err)
-        // Keep polling — server may not have the file yet
       }
     }
 
-    // Poll immediately, then every 3 s
     void poll()
     timerRef.current = setInterval(poll, 3000)
 
@@ -76,7 +76,7 @@ export default function ProgressView({ uploadName, onDone }: ProgressViewProps) 
       cancelled = true
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [uploadName, onDone])
+  }, [name, navigate])
 
   const stage = data?.stage ?? 'yolo'
   const pct = data?.processPrecentage ?? 0
@@ -98,7 +98,7 @@ export default function ProgressView({ uploadName, onDone }: ProgressViewProps) 
       <div style={{ textAlign: 'center' }}>
         <div style={{ fontSize: '56px', marginBottom: '16px' }}>🐠</div>
         <h2 style={{ marginBottom: '8px' }}>Analysing your video</h2>
-        <p className="body-large">{uploadName.replace(/_/g, ' ')}</p>
+        <p className="body-large">{name.replace(/_/g, ' ')}</p>
       </div>
 
       {/* Step indicators */}

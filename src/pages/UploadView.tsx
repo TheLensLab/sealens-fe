@@ -1,13 +1,9 @@
 import { useRef, useState, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as tus from 'tus-js-client'
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile, toBlobURL } from '@ffmpeg/util'
 import { API_BASE } from '../utils/api'
-
-interface UploadViewProps {
-  onUploadStart: (cleanName: string) => void
-  onUploadComplete: (cleanName: string) => void
-}
 
 function generateUUID(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -20,7 +16,8 @@ function generateUUID(): string {
   })
 }
 
-export default function UploadView({ onUploadStart, onUploadComplete }: UploadViewProps) {
+export default function UploadView() {
+  const navigate = useNavigate()
   const [dragging, setDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [progress, setProgress] = useState(0)
@@ -121,7 +118,6 @@ export default function UploadView({ onUploadStart, onUploadComplete }: UploadVi
       setIsUploading(true)
 
       const footageUID = generateUUID()
-      onUploadStart(footageUID)
 
       const upload = new tus.Upload(selectedFile, {
         endpoint: `${API_BASE}/files/`,
@@ -151,14 +147,14 @@ export default function UploadView({ onUploadStart, onUploadComplete }: UploadVi
         onSuccess() {
           setProgress(100)
           setIsUploading(false)
-          onUploadComplete(footageUID)
+          navigate(`/processing/${footageUID}`)
         },
       })
 
       uploadRef.current = upload
       upload.start()
     },
-    [onUploadStart, onUploadComplete]
+    [navigate]
   )
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
