@@ -907,6 +907,52 @@ footer {
   object-fit: cover;
 }
 
+/* ============================================
+   ONBOARDING FORM — SELECT DROPDOWNS
+   ============================================ */
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--color-subtle);
+}
+
+.input-group select {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 1px solid var(--color-surface-light);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: 'Figtree', sans-serif;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.input-group select:focus {
+  border-color: var(--color-primary);
+}
+
+.input-group select.select-placeholder {
+  color: var(--color-subtle);
+}
+
 .detection-box {
   position: absolute;
   top: 25%;

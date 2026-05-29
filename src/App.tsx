@@ -6,11 +6,12 @@ import ProgressView from './pages/ProgressView'
 import ResultsView from './pages/ResultsView'
 import VideosListView from './pages/VideosListView'
 import SignIn from './pages/SignIn'
+import OnboardingForm from './pages/OnboardingForm'
 
 function useBreadcrumb(): string {
   const { pathname } = useLocation()
   if (pathname === '/upload') return 'Upload'
-  if (pathname === '/library') return 'Video Library'
+  if (pathname === '/library') return 'balls'
   if (pathname.startsWith('/processing/')) {
     const name = decodeURIComponent(pathname.slice('/processing/'.length))
     return `Processing — ${name.replace(/_/g, ' ')}`
@@ -79,6 +80,7 @@ export default function App() {
       <Route path="/sign-in" element={<SignIn onSignIn={() => setIsAuthenticated(true)} />} />
 
       <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+        <Route path="/onboarding" element={<OnboardingForm />} />
         <Route element={<AppLayout />}>
           <Route index element={<Navigate to="/upload" replace />} />
           <Route path="/upload" element={<UploadView />} />
